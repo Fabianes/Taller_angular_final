@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>
+    {{ tarea.id }} {{ tarea.titulo }}
+    </h2>
+    <p>
+      {{ tarea.descripcion }}
+    </p>
+  </div>
+  <button (click)="pasarSiguienteEstado()"
+          class="btn btn-primary">
+      Pasar a estado En Proceso
+  </button>
+</div>
