@@ -15,6 +15,8 @@ export class TareaService {
       'titulo': t.titulo,
       'descripcion': t.descripcion,
       'estado': t.estado,
+      'latitud': t.latitud,
+      'longitud': t.longitud,
     })
   }
 
