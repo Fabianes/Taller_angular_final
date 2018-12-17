@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TareaCreadaComponent } from './tarea-creada/tarea-creada.component';
 import { TareaEnProcesoComponent } from './tarea-en-proceso/tarea-en-proceso.component';
 import { TareaTerminadaComponent } from './tarea-terminada/tarea-terminada.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TareaTerminadaComponent } from './tarea-terminada/tarea-terminada.compo
     BrowserModule,
     UiModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    LeafletModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
