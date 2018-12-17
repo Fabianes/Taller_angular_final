@@ -119,6 +119,8 @@ export class AppComponent implements OnInit {
   }
 
   crearTarea() {
+    this.newTarea.latitud = this.markers[0]._latlng['lat'];
+    this.newTarea.longitud = this.markers[0]._latlng['lng']
     console.log(this.newTarea);
     this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
       console.log('Creacion Tarea OK');
