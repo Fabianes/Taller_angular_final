@@ -10,6 +10,7 @@ export abstract class TareaBase {
 
   pasarSiguienteEstado() {
     this.tarea.estado = this.obtenerSiguienteEstado(this.tarea);
+    this.tarea.fecha_termino = this.finalizarTarea(this.tarea);
     this.tareaActualizada.emit(this.tarea);
   }
 

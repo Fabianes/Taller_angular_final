@@ -12,5 +12,7 @@ export class TareaEnProcesoComponent extends TareaBase {
   obtenerSiguienteEstado(t: Tarea) {
     return EstadoTarea.Terminada;
   }
-
+  finalizarTarea(){
+  	return new Date();
+  }
 }

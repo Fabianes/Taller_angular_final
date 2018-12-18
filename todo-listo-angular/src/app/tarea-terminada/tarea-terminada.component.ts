@@ -9,8 +9,16 @@ import { TareaBase } from '../tarea-base/tarea-base';
 })
 export class TareaTerminadaComponent extends TareaBase {
 
+  fechaTerminoTarea(){
+  	this.tarea.fecha_termino = new Date();
+  	console.log(this.tarea);
+    this.tareaActualizada.emit(this.tarea);
+  }
+  
   obtenerSiguienteEstado(t: Tarea) {
     /* No hace nada, no hay mas estados */
   }
-
+  finalizarTarea(){
+  	return new Date();
+  }
 }

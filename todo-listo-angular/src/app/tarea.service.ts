@@ -15,16 +15,21 @@ export class TareaService {
       'titulo': t.titulo,
       'descripcion': t.descripcion,
       'estado': t.estado,
+      'fecha_inicio': t.fecha_inicio,
       'latitud': t.latitud,
       'longitud': t.longitud,
     })
   }
 
   actualizarTarea(t: Tarea): Observable<any> {
+    console.log(t);
     return this.http.put(`http://localhost:8000/tareas/${t.id}/`, {
       'titulo': t.titulo,
       'descripcion': t.descripcion,
       'estado': t.estado,
+      'fecha_termino': t.fecha_termino,  
+      'latitud': t.latitud,
+      'longitud': t.longitud,
     })
   }
 

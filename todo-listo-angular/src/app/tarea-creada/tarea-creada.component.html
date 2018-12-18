@@ -7,9 +7,11 @@
     <p contenteditable="true" #desc>
       {{ tarea.descripcion }}
     </p>
+    Fecha creación: <input type="date"  value="{{tarea.fecha_inicio | date:'yyyy-MM-dd'}}" #finicio>
+
   </div>
 
-  <button class="btn btn-primary" (click)="actualizarTarea(titulo.textContent, desc.textContent)">
+  <button class="btn btn-primary" (click)="actualizarTarea(titulo.textContent, desc.textContent,finicio.textContent)">
   Actualizar Tarea
   </button>
 
