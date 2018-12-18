@@ -15,6 +15,7 @@ export abstract class TareaBase {
   }
 
   abstract obtenerSiguienteEstado(t: Tarea);
+  abstract finalizarTarea(t: Tarea);
 
 }
 

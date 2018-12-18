@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   constructor(public tareaService: TareaService, private http: HttpClient) {
     this.tareas = [];
-    this.newTarea = new Tarea(null, null, null);
+    this.newTarea = new Tarea(null, null, null, null, null, null, null, null);
     let maybe_user_token = window.localStorage.getItem('user_token');
     console.log(`ls user token: ${maybe_user_token}`);
     if(maybe_user_token) {
@@ -119,15 +119,16 @@ export class AppComponent implements OnInit {
   }
 
   crearTarea() {
+    //console.log(this.markers[0]([latlng['lat']));
     this.newTarea.latitud = this.markers[0]._latlng['lat'];
     this.newTarea.longitud = this.markers[0]._latlng['lng'];
     this.newTarea.fecha_inicio = new Date();
     console.log(this.newTarea);
-    this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
+    /*this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
       console.log('Creacion Tarea OK');
       this.refrescarTareas();
 
-    })
+    })*/
   }
 
   estado2str(e: EstadoTarea) {

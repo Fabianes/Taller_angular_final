@@ -7,11 +7,13 @@
     <p contenteditable="true" #desc>
       {{ tarea.descripcion }}
     </p>
-    Fecha creación: <input type="date"  value="{{tarea.fecha_inicio | date:'yyyy-MM-dd'}}" #finicio>
+   <!-- Fecha creación: <input type="date"  value="{{tarea.fecha_inicio | date:'yyyy-MM-dd'}}" [(ngModel)]="tarea.fecha_inicio">-->
+   Fecha creación: <input [ngModel]="tarea.fecha_inicio | date:'yyyy-MM-dd'" (ngModelChange)="tarea.fecha_inicio = $event" type="date" name="tarea.fecha_inicio"/>
+   Fecha término: <input [ngModel]="tarea.fecha_termino | date:'yyyy-MM-dd'" (ngModelChange)="tarea.fecha_termino = $event" type="date" name="tarea.fecha_termino"/>
 
   </div>
 
-  <button class="btn btn-primary" (click)="actualizarTarea(titulo.textContent, desc.textContent,finicio.textContent)">
+  <button class="btn btn-primary" (click)="actualizarTarea(titulo.textContent, desc.textContent)">
   Actualizar Tarea
   </button>
 

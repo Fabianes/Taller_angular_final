@@ -2,7 +2,7 @@
 
   
 
-  <div *ngIf="!loggedIn">
+  <div *ngIf="loggedIn">
     <a href="#" (click)="cerrarSesion()">Cerrar sesión</a>
     <div class="row">
       <div class="col-md-4" style="border: 1px solid black;">
@@ -108,7 +108,7 @@
     </div>
   </div>
 
-  <div *ngIf="loggedIn">
+  <div *ngIf="!loggedIn">
 
     <form (ngSubmit)="iniciarSesion()" >
     <div class="form-group">

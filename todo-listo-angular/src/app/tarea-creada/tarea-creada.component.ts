@@ -9,11 +9,13 @@ import { TareaBase } from '../tarea-base/tarea-base';
 })
 export class TareaCreadaComponent extends TareaBase {
 
-  actualizarTarea(nuevoTitulo, nuevaDesc, nuevaFInicio) {
+  actualizarTarea(nuevoTitulo, nuevaDesc) {
     this.tarea.titulo = nuevoTitulo;
     this.tarea.descripcion = nuevaDesc;
-    this.tarea.fecha_inicio = nuevaFInicio;
-    console.log(nuevaFInicio);
+    this.tarea.fecha_inicio = new Date(this.tarea.fecha_inicio);
+    this.tarea.fecha_termino = new Date(this.tarea.fecha_termino);
+    //this.tarea.fecha_inicio = nuevaFInicio;
+    //console.log(nuevaFInicio);
     console.log(this.tarea);
     this.tareaActualizada.emit(this.tarea);
   }

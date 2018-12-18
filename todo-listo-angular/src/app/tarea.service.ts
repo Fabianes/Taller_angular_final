@@ -27,6 +27,7 @@ export class TareaService {
       'titulo': t.titulo,
       'descripcion': t.descripcion,
       'estado': t.estado,
+      'fecha_inicio': t.fecha_inicio,
       'fecha_termino': t.fecha_termino,  
       'latitud': t.latitud,
       'longitud': t.longitud,
