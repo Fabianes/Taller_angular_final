@@ -2,8 +2,9 @@
 
   
 
-  <div *ngIf="loggedIn">
+  <div *ngIf="loggedIn && !tareasMapaFlag">
     <a href="#" (click)="cerrarSesion()">Cerrar sesión</a>
+    <a href="#" (click)="tareasMapa()">Mostrar tareas en mapa</a>
     <div class="row">
       <div class="col-md-4" style="border: 1px solid black;">
           <form (ngSubmit)="crearTarea()" #f="ngForm">        
@@ -51,7 +52,6 @@
               [leafletOptions]="options"
               (leafletClick)="mapClick($event)"
               [leafletLayers]="markers"
-              [leafletLayersControl]="layersControl"
               >
   </div>
 
@@ -113,7 +113,7 @@
     </div>
   </div>
 
-  <div *ngIf="!loggedIn">
+  <div *ngIf="!loggedIn && !tareasMapaFlag">
 
     <form (ngSubmit)="iniciarSesion()" >
     <div class="form-group">
@@ -131,5 +131,14 @@
 
     </form>
   </div>
-
+  <div *ngIf="tareasMapaFlag">
+      <a href="#" (click)="volver()">Volver</a>
+      <div  style="height: 1000px;"
+                leaflet 
+                [leafletOptions]="options2"
+                [leafletLayers]="markers2"
+                >
+    </div>
+  </div>
+  
 </app-layout>

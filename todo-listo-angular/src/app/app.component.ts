@@ -23,7 +23,9 @@ export class AppComponent implements OnInit {
   loggedIn = false;
   user_token: string;
   options;
+  options2;
   layersControl;
+  tareasMapaFlag = false;
 
   constructor(public tareaService: TareaService, private http: HttpClient) {
     this.tareas = [];
@@ -75,7 +77,7 @@ export class AppComponent implements OnInit {
       console.log('Refrescando tareas');
       this.refrescarTareas();
     });
-    this.llenarMapa();
+    
   }
 
   refrescarTareas() {
@@ -89,13 +91,60 @@ export class AppComponent implements OnInit {
     console.log(`Click: ${evt}`);
     console.log(Object.keys(evt));
     console.log(evt['latlng']);
+    let latlng = evt['latlng'];
+    this.newTarea.latitud = latlng['lat'];
+    this.newTarea.longitud = latlng['lng'];
     this.addMarker(evt['latlng']);
   }
 
   markers: L.Layer[] = [];
-  markers_guardados: L_guardados.Layer[] = [];
+  markers2: L.Layer[] = [];
+  //markers_guardados: L_guardados.Layer[] = [];
+  tareasMapa(){
+    this.tareasMapaFlag = true;
+    this.options2 = {
+      layers: [
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      ],
+      zoom: 15,      
+      center: L.latLng(-33.0454915,-71.6124715),
+    };
+    this.llenarMapa();
+  }
+
+  volver(){
+    this.tareasMapaFlag = false;
+    this.options = {
+      layers: [
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      ],
+      zoom: 15,      
+      center: L.latLng(-33.0454915,-71.6124715),
+    };
+  }
 
   llenarMapa(){
+    console.log(this.tareas);
+    let largo = this.tareas.length;
+    console.log(largo);
+    //for(let i in largo){
+    for(var i = 0; i < this.tareas.length; i++){
+      const newMarker2 = L.marker([this.tareas[i].latitud,  this.tareas[i].longitud], {
+        icon: L.icon({
+           iconSize: [ 25, 41 ],
+           iconAnchor: [ 13, 41 ],
+           iconUrl:   'assets/marker-icon.png',
+           shadowUrl: 'assets/marker-shadow.png'
+        })
+      });
+
+      /*while(this.markers.length > 0) {
+        this.markers.pop();
+      }*/
+      this.markers2.push(newMarker2);
+      console.log(this.markers2);
+    }
+    
 
   }
 
@@ -113,6 +162,7 @@ export class AppComponent implements OnInit {
       this.markers.pop();
     }
 		this.markers.push(newMarker);
+    console.log(this.markers);
 	}
 
   actualizarTarea(t: Tarea) {
