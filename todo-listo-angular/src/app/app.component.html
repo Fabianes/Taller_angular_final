@@ -51,6 +51,7 @@
               [leafletOptions]="options"
               (leafletClick)="mapClick($event)"
               [leafletLayers]="markers"
+              [leafletLayersControl]="layersControl"
               >
   </div>
 
@@ -62,6 +63,8 @@
               <th>#</th>
               <th>Titulo</th>
               <th>Estado</th>
+              <th>Fecha Creación</th>
+              <th>Fecha Término</th>
             </tr>
             <tr *ngFor="let t of tareas;"
               [class.selected]="t === tareaSeleccionada">
@@ -73,6 +76,8 @@
                 </a>
               </td>
               <td>{{ estado2str(t.estado) }}</td>
+              <td>{{ t.fecha_inicio | date:'dd-MM-yyyy'}}</td>
+              <td>{{ t.fecha_termino | date:'dd-MM-yyyy'}}</td>
             </tr>
           </table>
       </div>

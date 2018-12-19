@@ -22,7 +22,8 @@ export class AppComponent implements OnInit {
   password: string;
   loggedIn = false;
   user_token: string;
-  options; 
+  options;
+  layersControl;
 
   constructor(public tareaService: TareaService, private http: HttpClient) {
     this.tareas = [];
@@ -69,12 +70,12 @@ export class AppComponent implements OnInit {
       center: L.latLng(-33.0454915,-71.6124715),
     };
     
-
     this.refrescarTareas();
     interval(30 * 1000).subscribe(_ => {
       console.log('Refrescando tareas');
       this.refrescarTareas();
     });
+    this.llenarMapa();
   }
 
   refrescarTareas() {
@@ -92,6 +93,11 @@ export class AppComponent implements OnInit {
   }
 
   markers: L.Layer[] = [];
+  markers_guardados: L_guardados.Layer[] = [];
+
+  llenarMapa(){
+
+  }
 
   addMarker(latlng) {
     const newMarker = L.marker([latlng['lat'],  latlng['lng']], {
@@ -120,8 +126,8 @@ export class AppComponent implements OnInit {
 
   crearTarea() {
     //console.log(this.markers[0]([latlng['lat']));
-    this.newTarea.latitud = this.markers[0]._latlng['lat'];
-    this.newTarea.longitud = this.markers[0]._latlng['lng'];
+    //this.newTarea.latitud = this.markers[0]._latlng['lat'];
+    //this.newTarea.longitud = this.markers[0]._latlng['lng'];
     this.newTarea.fecha_inicio = new Date();
     console.log(this.newTarea);
     /*this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
