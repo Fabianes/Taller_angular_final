@@ -3,8 +3,8 @@
   
 
   <div *ngIf="loggedIn && !tareasMapaFlag">
-    <a href="#" (click)="cerrarSesion()">Cerrar sesión</a>
-    <a href="#" (click)="tareasMapa()">Mostrar tareas en mapa</a>
+    <!--<a href="#" (click)="cerrarSesion()">Cerrar sesión</a>-->
+    <button class="btn btn-primary" href="#" (click)="tareasMapa()">Mostrar tareas en mapa</button>
     <div class="row">
       <div class="col-md-4" style="border: 1px solid black;">
           <form (ngSubmit)="crearTarea()" #f="ngForm">        
@@ -133,7 +133,7 @@
   </div>
   <div *ngIf="tareasMapaFlag">
       <a href="#" (click)="volver()">Volver</a>
-      <div  style="height: 1000px;"
+      <div  style="height: 500px;"
                 leaflet 
                 [leafletOptions]="options2"
                 [leafletLayers]="markers2"

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { UiModule } from './ui/ui.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {DatePipe} from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { TareaCreadaComponent } from './tarea-creada/tarea-creada.component';
@@ -24,7 +25,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     HttpClientModule,
     LeafletModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { Tarea, EstadoTarea } from './tarea';
 import { TareaService } from './tarea.service';
 import { interval } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 import * as L from 'leaflet';
 
 @Component({
@@ -10,6 +11,7 @@ import * as L from 'leaflet';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 
 export class AppComponent implements OnInit {
   title = 'Todo Listo!';
@@ -27,7 +29,7 @@ export class AppComponent implements OnInit {
   layersControl;
   tareasMapaFlag = false;
 
-  constructor(public tareaService: TareaService, private http: HttpClient) {
+  constructor(public tareaService: TareaService, private http: HttpClient, private datePipe: DatePipe) {
     this.tareas = [];
     this.newTarea = new Tarea(null, null, null, null, null, null, null, null);
     let maybe_user_token = window.localStorage.getItem('user_token');
@@ -99,7 +101,7 @@ export class AppComponent implements OnInit {
 
   markers: L.Layer[] = [];
   markers2: L.Layer[] = [];
-  //markers_guardados: L_guardados.Layer[] = [];
+
   tareasMapa(){
     this.tareasMapaFlag = true;
     this.options2 = {
@@ -127,22 +129,28 @@ export class AppComponent implements OnInit {
     console.log(this.tareas);
     let largo = this.tareas.length;
     console.log(largo);
-    //for(let i in largo){
     for(var i = 0; i < this.tareas.length; i++){
-      const newMarker2 = L.marker([this.tareas[i].latitud,  this.tareas[i].longitud], {
-        icon: L.icon({
-           iconSize: [ 25, 41 ],
-           iconAnchor: [ 13, 41 ],
-           iconUrl:   'assets/marker-icon.png',
-           shadowUrl: 'assets/marker-shadow.png'
-        })
-      });
-
-      /*while(this.markers.length > 0) {
-        this.markers.pop();
-      }*/
-      this.markers2.push(newMarker2);
-      console.log(this.markers2);
+      if (this.tareas[i].latitud != null){
+          const newMarker2 = L.marker([this.tareas[i].latitud,  this.tareas[i].longitud], {
+          icon: L.icon({
+             iconSize: [ 25, 41 ],
+             iconAnchor: [ 13, 41 ],
+             iconUrl:   'assets/marker-icon.png',
+             shadowUrl: 'assets/marker-shadow.png'
+          })
+        });
+        let fecha_inicio_parse = this.datePipe.transform(this.tareas[i].fecha_inicio,"dd-MM-yyyy");
+        let fecha_termino_parse = this.datePipe.transform(this.tareas[i].fecha_termino,"dd-MM-yyyy");
+        if (fecha_termino_parse == null){
+          fecha_termino_parse = '-';
+        }
+        newMarker2.bindPopup("<b>Título:</b><br/>"+this.tareas[i].titulo
+          +"<br/><b>Descripción:</b><br/>"+this.tareas[i].descripcion
+          +"<br/><b>Fecha de Creación:</b><br/>"+fecha_inicio_parse
+          +"<br/><b>Fecha de Término:</b><br/>"+fecha_termino_parse);
+        this.markers2.push(newMarker2);
+      }
+      
     }
     
 
@@ -157,7 +165,7 @@ export class AppComponent implements OnInit {
          shadowUrl: 'assets/marker-shadow.png'
       })
     });
-
+    
     while(this.markers.length > 0) {
       this.markers.pop();
     }
@@ -175,16 +183,18 @@ export class AppComponent implements OnInit {
   }
 
   crearTarea() {
-    //console.log(this.markers[0]([latlng['lat']));
-    //this.newTarea.latitud = this.markers[0]._latlng['lat'];
-    //this.newTarea.longitud = this.markers[0]._latlng['lng'];
     this.newTarea.fecha_inicio = new Date();
+    this.newTarea.estado = 0;
+    if(this.newTarea.latitud == null){
+      this.newTarea.latitud = undefined;
+      this.newTarea.longitud = undefined;
+    }
     console.log(this.newTarea);
-    /*this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
+    this.tareaService.crearTarea(this.newTarea).subscribe(_ => {
       console.log('Creacion Tarea OK');
       this.refrescarTareas();
 
-    })*/
+    })
   }
 
   estado2str(e: EstadoTarea) {

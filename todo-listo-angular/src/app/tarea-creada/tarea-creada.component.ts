@@ -25,7 +25,7 @@ export class TareaCreadaComponent extends TareaBase {
   }
 
   finalizarTarea(){
-    return new Date();
+    
   }
 }
 
