@@ -63,6 +63,16 @@ export class AppComponent implements OnInit {
         //maybe_user_token = window.localStorage.clear();
     })  
   }
+  cerrarSesion() {
+    console.log(`u: ${this.username} - p: ${this.password}`);  
+    this.http.post('http://localhost:8000/rest-auth/logout/', {
+      'username': this.username,
+      'password': this.password,
+    }).subscribe(res => {
+        this.loggedIn = false;
+        window.localStorage.clear();
+    })  
+  }
 
   ngOnInit() {
 
